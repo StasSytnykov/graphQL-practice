@@ -13,10 +13,11 @@ import {
   ListItemIcon,
   ListItemText,
   Hidden,
+  Link,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 function Navigation() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -24,15 +25,22 @@ function Navigation() {
   const list = () => (
     <Box sx={{ width: 250 }} role="presentation">
       <List>
-        <ListItem disablePadding>
-          <ListItemButton onClick={() => setIsDrawerOpen(false)}>
-            <Link to={"settings"}>
+        <ListItem>
+          <Link
+            to={"settings"}
+            component={RouterLink}
+            sx={{ textDecoration: "none", textTransform: "upperCase" }}
+          >
+            <ListItemButton
+              onClick={() => setIsDrawerOpen(false)}
+              sx={{ width: 218 }}
+            >
               <ListItemIcon>
                 <SettingsIcon />
               </ListItemIcon>
               <ListItemText primary="Settings" />
-            </Link>
-          </ListItemButton>
+            </ListItemButton>
+          </Link>
         </ListItem>
       </List>
     </Box>
@@ -55,14 +63,20 @@ function Navigation() {
             </IconButton>
           </Hidden>
 
-          <Link to={"/"}>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-              Movies recommendation
-            </Typography>
-          </Link>
+          <Box sx={{ flexGrow: 1, display: { md: "flex" } }}>
+            <Link
+              to={"/"}
+              component={RouterLink}
+              sx={{ textDecoration: "none" }}
+            >
+              <Typography variant="h6" component="div" sx={{ color: "white" }}>
+                Movies recommendation
+              </Typography>
+            </Link>
+          </Box>
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <Link to={"settings"}>
+            <Link to={"settings"} component={RouterLink}>
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 Settings
               </Button>

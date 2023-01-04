@@ -1,4 +1,4 @@
-import { CssBaseline, Container } from "@mui/material";
+import { CssBaseline, Container, Box } from "@mui/material";
 import { Navigation } from "./components";
 import { Outlet } from "react-router-dom";
 
@@ -7,9 +7,18 @@ function App() {
     <>
       <CssBaseline />
       <Navigation />
-      <Container maxWidth={"xl"}>
-        <Outlet />
-      </Container>
+
+      <Box
+        sx={{
+          backgroundColor: (theme) => theme.palette.grey[100],
+          height: "calc(100vh - 68.5px)",
+          overflow: "auto",
+        }}
+      >
+        <Container maxWidth={"xl"}>
+          <Outlet />
+        </Container>
+      </Box>
     </>
   );
 }
