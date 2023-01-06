@@ -7,9 +7,10 @@ import {
   Card,
   CardMedia,
 } from "@mui/material";
+import { IMovie } from "../../pages/Home";
 
 export interface Props {
-  movie: { [key: string]: string };
+  movie: IMovie;
   onDeleteMovie: () => void;
 }
 
@@ -18,13 +19,13 @@ const MovieCardSelected = ({ movie, onDeleteMovie }: Props) => (
     <CardMedia
       component="img"
       sx={{ width: 151 }}
-      image="https://www.themoviedb.org/t/p/w220_and_h330_face/w2nOl7KhwcUj11YxEi9Nknj9cqu.jpg"
-      alt="Live from space album cover"
+      image={movie.posterPath}
+      alt={movie.title}
     />
     <Box sx={{ display: "flex", flexDirection: "column" }}>
       <CardContent sx={{ flex: "1 0 auto" }}>
         <Typography component="div" variant="h5">
-          Live From Space
+          {movie.title}
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
           Mac Miller

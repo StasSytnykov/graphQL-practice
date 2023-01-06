@@ -1,25 +1,33 @@
 import { CssBaseline, Container, Box } from "@mui/material";
-import { Navigation } from "./components";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { Outlet } from "react-router-dom";
+import { Navigation } from "./components";
 
 function App() {
-  return (
-    <>
-      <CssBaseline />
-      <Navigation />
+  const client = new ApolloClient({
+    uri: "http://localhost:4000/",
+    cache: new InMemoryCache(),
+  });
 
-      <Box
-        sx={{
-          backgroundColor: (theme) => theme.palette.grey[100],
-          height: "calc(100vh - 68.5px)",
-          overflow: "auto",
-        }}
-      >
-        <Container maxWidth={"xl"}>
-          <Outlet />
-        </Container>
-      </Box>
-    </>
+  return (
+    <ApolloProvider client={client}>
+      <>
+        <CssBaseline />
+        <Navigation />
+
+        <Box
+          sx={{
+            backgroundColor: (theme) => theme.palette.grey[100],
+            height: "calc(100vh - 68.5px)",
+            overflow: "auto",
+          }}
+        >
+          <Container maxWidth={"xl"}>
+            <Outlet />
+          </Container>
+        </Box>
+      </>
+    </ApolloProvider>
   );
 }
 

@@ -9,9 +9,10 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { IMovie } from "../../pages/Home";
 
 export interface Props {
-  movie: { [key: string]: string };
+  movie: IMovie;
   onCardSelect: () => void;
 }
 
@@ -69,15 +70,15 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
       <CardMedia
         component="img"
         height="250"
-        image="https://www.themoviedb.org/t/p/w220_and_h330_face/w2nOl7KhwcUj11YxEi9Nknj9cqu.jpg"
-        alt="Paella dish"
+        image={movie.posterPath}
+        alt={movie.title}
       />
       <CardContent>
         <Typography variant="h6" component="h3">
           {movie.title}
         </Typography>
         <Typography variant="body2" component="p">
-          {movie.realeseDate}
+          {movie.releaseDate}
         </Typography>
       </CardContent>
     </Card>
