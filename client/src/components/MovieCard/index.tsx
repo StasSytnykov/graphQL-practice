@@ -25,6 +25,12 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const corectDate = movie.releaseDate
+    .replaceAll("-", ".")
+    .split(".")
+    .reverse()
+    .join(".");
+
   return (
     <Card sx={{ maxWidth: 250, position: "relative" }}>
       <Box sx={{ position: "absolute", right: 0 }}>
@@ -78,7 +84,7 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
           {movie.title}
         </Typography>
         <Typography variant="body2" component="p">
-          {movie.releaseDate}
+          {corectDate}
         </Typography>
       </CardContent>
     </Card>
