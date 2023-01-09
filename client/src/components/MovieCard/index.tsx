@@ -77,7 +77,7 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
 
       <CardMedia
         component="img"
-        sx={{ width: "100%", height: "100%", maxHeight: 315, minHeight: 315 }}
+        sx={{ width: "100%", height: "100%", maxHeight: 330, minHeight: 330 }}
         image={movie.posterPath}
         alt={movie.title}
       />
