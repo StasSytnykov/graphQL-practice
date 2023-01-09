@@ -15,7 +15,7 @@ const MAX_TITLE_LENGTH = 16;
 
 export interface Props {
   movie: IMovie;
-  onCardSelect: () => void;
+  onCardSelect: (movie: IMovie) => void;
 }
 
 const MovieCard = ({ movie, onCardSelect }: Props) => {
@@ -67,7 +67,7 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
           <MenuItem
             onClick={() => {
               handleClose();
-              onCardSelect();
+              onCardSelect(movie);
             }}
           >
             Select

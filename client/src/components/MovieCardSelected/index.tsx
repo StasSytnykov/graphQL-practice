@@ -11,7 +11,7 @@ import { IMovie } from "../../pages/Home";
 
 export interface Props {
   movie: IMovie;
-  onDeleteMovie: () => void;
+  onDeleteMovie: (id: number) => void;
 }
 
 const MovieCardSelected = ({ movie, onDeleteMovie }: Props) => (
@@ -32,7 +32,11 @@ const MovieCardSelected = ({ movie, onDeleteMovie }: Props) => (
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="primary">
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => onDeleteMovie(movie.id)}
+        >
           Delete
         </Button>
       </CardActions>

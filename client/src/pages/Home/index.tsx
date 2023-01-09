@@ -7,6 +7,10 @@ import MovieCard from "../../components/MovieCard";
 import BasicPagination from "../../components/Pagination/Index";
 import { MOVIES_QUERY } from "./queries";
 import { useState } from "react";
+import { useMovies } from "../../hooks/useMovies";
+import { MovieCardSelected } from "../../components";
+
+const MAX_PAGES = 500;
 
 interface IGenre {
   id: number;
@@ -36,6 +40,7 @@ const Home = () => {
   const { loading, error, data } = useQuery(MOVIES_QUERY, {
     variables: { page },
   });
+  const { selectedMovies, selectMovie, deleteMovie } = useMovies();
 
   if (error) {
     return <div>Error</div>;
@@ -57,12 +62,12 @@ const Home = () => {
                   <Grid container spacing={2}>
                     {data.movies.results.map((movie: IMovie) => (
                       <Grid key={movie.id} xs={12} sm={6} md={4} lg={3}>
-                        <MovieCard movie={movie} onCardSelect={() => {}} />
+                        <MovieCard movie={movie} onCardSelect={selectMovie} />
                       </Grid>
                     ))}
                   </Grid>
                   <BasicPagination
-                    totalPages={500}
+                    totalPages={MAX_PAGES}
                     setPage={setPage}
                     page={page}
                   />
@@ -72,7 +77,15 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid xs={12} md={4}>
-          <SelectedMovies>Selected Movies</SelectedMovies>
+          <SelectedMovies>
+            {selectedMovies.map((movie: IMovie) => (
+              <MovieCardSelected
+                movie={movie}
+                key={movie.id}
+                onDeleteMovie={deleteMovie}
+              />
+            ))}
+          </SelectedMovies>
         </Grid>
       </Grid>
     </Box>

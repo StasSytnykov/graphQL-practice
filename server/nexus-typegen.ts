@@ -107,7 +107,6 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Query: {
     movies: { // args
-      skip?: number | null; // Int
       take?: number | null; // Int
     }
   }

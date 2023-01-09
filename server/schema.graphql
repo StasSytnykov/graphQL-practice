@@ -23,5 +23,5 @@ type Movies {
 }
 
 type Query {
-  movies(skip: Int, take: Int): Movies!
+  movies(take: Int): Movies!
 }

@@ -1,6 +1,5 @@
 import axios from "axios";
 import Movies from "./movies/entities/Movies";
-import { Genres } from "./movies/entities/Movie";
 
 const API_KEY = process.env.API_KEY;
 const DEFAULT_URL = process.env.DEFAULT_URL;

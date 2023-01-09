@@ -36,7 +36,6 @@ export const MoviesQuery = objectType({
     t.nonNull.field("movies", {
       type: "Movies",
       args: {
-        skip: intArg(),
         take: intArg(),
       },
       async resolve(parent, args, context, info): Promise<any> {
