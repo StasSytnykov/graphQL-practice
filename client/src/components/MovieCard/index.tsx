@@ -11,6 +11,8 @@ import Box from "@mui/material/Box";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { IMovie } from "../../pages/Home";
 
+const MAX_TITLE_LENGTH = 16;
+
 export interface Props {
   movie: IMovie;
   onCardSelect: () => void;
@@ -25,7 +27,7 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const corectDate = movie.releaseDate
+  const correctDate = movie.releaseDate
     .replaceAll("-", ".")
     .split(".")
     .reverse()
@@ -75,16 +77,20 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
 
       <CardMedia
         component="img"
-        height="250"
+        sx={{ width: "100%", height: "100%", maxHeight: 315, minHeight: 315 }}
         image={movie.posterPath}
         alt={movie.title}
       />
       <CardContent>
         <Typography variant="h6" component="h3">
-          {movie.title}
+          {movie.title.length > MAX_TITLE_LENGTH
+            ? movie.title
+                .slice(0, -(movie.title.length - MAX_TITLE_LENGTH))
+                .concat("...")
+            : movie.title}
         </Typography>
         <Typography variant="body2" component="p">
-          {corectDate}
+          {correctDate}
         </Typography>
       </CardContent>
     </Card>
