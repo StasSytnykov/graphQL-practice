@@ -5,18 +5,10 @@ import { Genres } from "./movies/entities/Movie";
 const API_KEY = process.env.API_KEY;
 const DEFAULT_URL = process.env.DEFAULT_URL;
 
-export const getPopular = async () => {
+export const getPopular = async (page = 1) => {
   const result = await axios.get(
-    `${DEFAULT_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=1`
+    `${DEFAULT_URL}/movie/popular?api_key=${API_KEY}&language=en-US&page=${page}`
   );
 
   return new Movies(result.data);
-};
-
-export const getGenres = async (movieId: string) => {
-  const result = await axios.get(
-    `${DEFAULT_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
-  );
-
-  return new Genres(result.data.genres);
 };

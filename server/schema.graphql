@@ -7,10 +7,6 @@ type Genre {
   name: String
 }
 
-type Genres {
-  genre: [Genre]!
-}
-
 type Movie {
   genres: [Genre]
   id: Int!
@@ -27,6 +23,5 @@ type Movies {
 }
 
 type Query {
-  genres: Genres!
-  movies: Movies!
+  movies(skip: Int, take: Int): Movies!
 }

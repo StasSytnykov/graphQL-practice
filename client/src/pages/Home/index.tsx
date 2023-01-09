@@ -4,7 +4,9 @@ import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 import MovieCard from "../../components/MovieCard";
+import BasicPagination from "../../components/Pagination/Index";
 import { MOVIES_QUERY } from "./queries";
+import { useState } from "react";
 
 interface IGenre {
   id: number;
@@ -30,7 +32,10 @@ const SelectedMovies = styled(Paper)(({ theme }) => ({
 }));
 
 const Home = () => {
-  const { loading, error, data } = useQuery(MOVIES_QUERY);
+  const [page, setPage] = useState(1);
+  const { loading, error, data } = useQuery(MOVIES_QUERY, {
+    variables: { page },
+  });
 
   if (error) {
     return <div>Error</div>;
@@ -48,13 +53,20 @@ const Home = () => {
               {loading ? (
                 "Loading..."
               ) : (
-                <Grid container spacing={2}>
-                  {data.movies.results.map((movie: IMovie) => (
-                    <Grid key={movie.id} xs={12} sm={6} md={4} lg={3}>
-                      <MovieCard movie={movie} onCardSelect={() => {}} />
-                    </Grid>
-                  ))}
-                </Grid>
+                <>
+                  <Grid container spacing={2}>
+                    {data.movies.results.map((movie: IMovie) => (
+                      <Grid key={movie.id} xs={12} sm={6} md={4} lg={3}>
+                        <MovieCard movie={movie} onCardSelect={() => {}} />
+                      </Grid>
+                    ))}
+                  </Grid>
+                  <BasicPagination
+                    totalPages={500}
+                    setPage={setPage}
+                    page={page}
+                  />
+                </>
               )}
             </Box>
           </Paper>

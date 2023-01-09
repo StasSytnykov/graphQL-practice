@@ -1,5 +1,5 @@
-import { objectType } from "nexus";
-import { getGenres, getPopular } from "../modules";
+import { objectType, intArg } from "nexus";
+import { getPopular } from "../modules";
 
 export const Movies = objectType({
   name: "Movies",
@@ -30,27 +30,18 @@ export const Genre = objectType({
   },
 });
 
-// export const Genres = objectType({
-//   name: "Genres",
-//   definition(t) {
-//     t.nonNull.list.field("genre", { type: Genre });
-//   },
-// });
-
 export const MoviesQuery = objectType({
   name: "Query",
   definition(t) {
     t.nonNull.field("movies", {
       type: "Movies",
+      args: {
+        skip: intArg(),
+        take: intArg(),
+      },
       async resolve(parent, args, context, info): Promise<any> {
-        return await getPopular();
+        return await getPopular(args.take ? args.take : undefined);
       },
     });
-    // t.nonNull.field("genres", {
-    //   type: "Genres",
-    //   async resolve(parent, args, context, info): Promise<any> {
-    //     return await getGenres("5");
-    //   },
-    // });
   },
 });

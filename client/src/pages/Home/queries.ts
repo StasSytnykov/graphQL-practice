@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const MOVIES_QUERY = gql`
-  query {
-    movies {
+  query ($page: Int!) {
+    movies(take: $page) {
       results {
         posterPath
         id
