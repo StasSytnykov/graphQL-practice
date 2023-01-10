@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
 import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 import MovieCard from "../../components/MovieCard";
@@ -77,14 +78,23 @@ const Home = () => {
           </Paper>
         </Grid>
         <Grid xs={12} md={4}>
-          <SelectedMovies sx={{ overflowY: "auto" }}>
-            {selectedMovies.map((movie: IMovie) => (
-              <MovieCardSelected
-                movieId={movie.id}
-                key={movie.id}
-                onDeleteMovie={deleteMovie}
-              />
-            ))}
+          <SelectedMovies>
+            <Stack
+              spacing={2}
+              direction="column"
+              sx={{ maxHeight: 400, overflowY: "auto" }}
+            >
+              {selectedMovies.map((movie: IMovie) => (
+                <Box>
+                  <MovieCardSelected
+                    key={movie.id}
+                    movieId={movie.id}
+                    onDeleteMovie={deleteMovie}
+                  />
+                </Box>
+              ))}
+            </Stack>
+            <Box>Test</Box>
           </SelectedMovies>
         </Grid>
       </Grid>
