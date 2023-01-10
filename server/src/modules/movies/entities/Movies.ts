@@ -1,10 +1,16 @@
 import { Movie } from "./Movie";
 
+export type TGenre = {
+  id: number;
+  name: string;
+};
+
 export interface IMovie {
   id: number;
   poster_path?: string;
   release_date: string;
   title: string;
+  genres?: TGenre[];
 }
 
 export interface IMovies {

@@ -8,16 +8,8 @@ type Genre {
 }
 
 type Movie {
-  id: Int!
-  posterPath: String
-  releaseDate: String!
-  title: String!
-}
-
-type MovieDetails {
   genres: [Genre]
   id: Int!
-  overview: String
   posterPath: String
   releaseDate: String!
   title: String!
@@ -31,6 +23,6 @@ type Movies {
 }
 
 type Query {
-  movieDetails(id: Int): MovieDetails!
+  movieDetails(id: Int): Movie!
   movies(take: Int): Movies!
 }

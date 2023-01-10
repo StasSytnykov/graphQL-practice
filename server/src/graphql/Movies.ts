@@ -18,18 +18,7 @@ export const Movie = objectType({
     t.nonNull.string("releaseDate");
     t.string("posterPath");
     t.nonNull.int("id");
-  },
-});
-
-export const MovieDetails = objectType({
-  name: "MovieDetails",
-  definition(t) {
-    t.nonNull.string("title");
-    t.nonNull.string("releaseDate");
-    t.string("posterPath");
     t.list.field("genres", { type: Genre });
-    t.nonNull.int("id");
-    t.string("overview");
   },
 });
 
@@ -54,12 +43,12 @@ export const MoviesQuery = extendType({
       },
     });
     t.nonNull.field("movieDetails", {
-      type: MovieDetails,
+      type: Movie,
       args: {
         id: intArg(),
       },
       async resolve(parent, args, context, info): Promise<any> {
-        return await getDetails(args.id ? args.id : 297761);
+        return await getDetails(args.id ? args.id : 1);
       },
     });
   },

@@ -80,7 +80,7 @@ const Home = () => {
           <SelectedMovies sx={{ overflowY: "auto" }}>
             {selectedMovies.map((movie: IMovie) => (
               <MovieCardSelected
-                movie={movie}
+                movieId={movie.id}
                 key={movie.id}
                 onDeleteMovie={deleteMovie}
               />
