@@ -1,5 +1,5 @@
-import { objectType, intArg } from "nexus";
-import { getPopular } from "../modules";
+import { objectType, intArg, extendType } from "nexus";
+import { getDetails, getPopular } from "../modules";
 
 export const Movies = objectType({
   name: "Movies",
@@ -17,8 +17,19 @@ export const Movie = objectType({
     t.nonNull.string("title");
     t.nonNull.string("releaseDate");
     t.string("posterPath");
+    t.nonNull.int("id");
+  },
+});
+
+export const MovieDetails = objectType({
+  name: "MovieDetails",
+  definition(t) {
+    t.nonNull.string("title");
+    t.nonNull.string("releaseDate");
+    t.string("posterPath");
     t.list.field("genres", { type: Genre });
     t.nonNull.int("id");
+    t.string("overview");
   },
 });
 
@@ -26,12 +37,12 @@ export const Genre = objectType({
   name: "Genre",
   definition(t) {
     t.nonNull.int("id");
-    t.string("name");
+    t.nonNull.string("name");
   },
 });
 
-export const MoviesQuery = objectType({
-  name: "Query",
+export const MoviesQuery = extendType({
+  type: "Query",
   definition(t) {
     t.nonNull.field("movies", {
       type: "Movies",
@@ -40,6 +51,15 @@ export const MoviesQuery = objectType({
       },
       async resolve(parent, args, context, info): Promise<any> {
         return await getPopular(args.take ? args.take : undefined);
+      },
+    });
+    t.nonNull.field("movieDetails", {
+      type: MovieDetails,
+      args: {
+        id: intArg(),
+      },
+      async resolve(parent, args, context, info): Promise<any> {
+        return await getDetails(args.id ? args.id : 297761);
       },
     });
   },

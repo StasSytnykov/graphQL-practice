@@ -30,11 +30,18 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   Genre: { // root type
     id: number; // Int!
-    name?: string | null; // String
+    name: string; // String!
   }
   Movie: { // root type
+    id: number; // Int!
+    posterPath?: string | null; // String
+    releaseDate: string; // String!
+    title: string; // String!
+  }
+  MovieDetails: { // root type
     genres?: Array<NexusGenRootTypes['Genre'] | null> | null; // [Genre]
     id: number; // Int!
+    overview?: string | null; // String
     posterPath?: string | null; // String
     releaseDate: string; // String!
     title: string; // String!
@@ -61,11 +68,18 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Genre: { // field return type
     id: number; // Int!
-    name: string | null; // String
+    name: string; // String!
   }
   Movie: { // field return type
+    id: number; // Int!
+    posterPath: string | null; // String
+    releaseDate: string; // String!
+    title: string; // String!
+  }
+  MovieDetails: { // field return type
     genres: Array<NexusGenRootTypes['Genre'] | null> | null; // [Genre]
     id: number; // Int!
+    overview: string | null; // String
     posterPath: string | null; // String
     releaseDate: string; // String!
     title: string; // String!
@@ -77,6 +91,7 @@ export interface NexusGenFieldTypes {
     totalResults: number; // Int!
   }
   Query: { // field return type
+    movieDetails: NexusGenRootTypes['MovieDetails']; // MovieDetails!
     movies: NexusGenRootTypes['Movies']; // Movies!
   }
 }
@@ -87,8 +102,15 @@ export interface NexusGenFieldTypeNames {
     name: 'String'
   }
   Movie: { // field return type name
+    id: 'Int'
+    posterPath: 'String'
+    releaseDate: 'String'
+    title: 'String'
+  }
+  MovieDetails: { // field return type name
     genres: 'Genre'
     id: 'Int'
+    overview: 'String'
     posterPath: 'String'
     releaseDate: 'String'
     title: 'String'
@@ -100,12 +122,16 @@ export interface NexusGenFieldTypeNames {
     totalResults: 'Int'
   }
   Query: { // field return type name
+    movieDetails: 'MovieDetails'
     movies: 'Movies'
   }
 }
 
 export interface NexusGenArgTypes {
   Query: {
+    movieDetails: { // args
+      id?: number | null; // Int
+    }
     movies: { // args
       take?: number | null; // Int
     }

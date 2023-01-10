@@ -6,10 +6,17 @@ export const useMovies = () => {
 
   const selectMovie = useCallback(
     (movie: IMovie) => {
-      if (selectedMovies.find((choseMovie) => choseMovie.id === movie.id)) {
+      const isAddedMovie = selectedMovies.find(
+        (choseMovie) => choseMovie.id === movie.id
+      );
+      const moviesQuantity = selectedMovies.length;
+
+      if (isAddedMovie) {
         alert("This movie already added");
+      } else if (moviesQuantity < 20) {
+        setSelectedMovies([movie, ...selectedMovies]);
       } else {
-        setSelectedMovies([...selectedMovies, movie]);
+        alert("Maximum movies is 20");
       }
     },
     [selectedMovies]

@@ -1,16 +1,10 @@
 import { Movie } from "./Movie";
 
-interface IGenre {
-  id: number;
-  name?: string;
-}
-
 export interface IMovie {
   id: number;
   poster_path?: string;
   release_date: string;
   title: string;
-  genres?: IGenre[];
 }
 
 export interface IMovies {
@@ -20,7 +14,7 @@ export interface IMovies {
   results: IMovie[];
 }
 
-class Movies {
+export class Movies {
   page: number;
   totalResults: number;
   totalPages: number;
@@ -33,5 +27,3 @@ class Movies {
     this.results = movies.results.map((movie) => new Movie(movie));
   }
 }
-
-export default Movies;
