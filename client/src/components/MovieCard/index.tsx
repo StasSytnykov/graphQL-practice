@@ -34,8 +34,8 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
     .join(".");
 
   return (
-    <Card sx={{ maxWidth: 250, position: "relative" }}>
-      <Box sx={{ position: "absolute", right: 0 }}>
+    <Card sx={{ maxWidth: 250, maxHeight: 420, position: "relative" }}>
+      <Box sx={{ position: "absolute", right: 5, top: 5 }}>
         <IconButton
           aria-label="more"
           id="long-button"
@@ -43,8 +43,9 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
           aria-expanded={open ? "true" : undefined}
           aria-haspopup="true"
           onClick={handleClick}
+          sx={{ backgroundColor: grey[600], opacity: 0.8 }}
         >
-          <MoreVertIcon />
+          <MoreVertIcon sx={{ color: grey[100] }} />
         </IconButton>
         <Menu
           sx={{ position: "absolute", left: -130 }}
@@ -82,7 +83,11 @@ const MovieCard = ({ movie, onCardSelect }: Props) => {
         alt={movie.title}
       />
       <CardContent>
-        <Typography variant="h6" component="h3">
+        <Typography
+          variant="h6"
+          component="h3"
+          sx={{ whiteSpace: "nowrap", overflow: "hidden" }}
+        >
           {movie.title.length > MAX_TITLE_LENGTH
             ? movie.title
                 .slice(0, -(movie.title.length - MAX_TITLE_LENGTH))
