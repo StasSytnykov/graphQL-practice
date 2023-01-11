@@ -1,15 +1,13 @@
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
-import Stack from "@mui/material/Stack";
-import { styled } from "@mui/material/styles";
 import { useQuery } from "@apollo/client";
 import MovieCard from "../../components/MovieCard";
 import BasicPagination from "../../components/Pagination/Index";
 import { MOVIES_QUERY } from "./queries";
 import { useState } from "react";
 import { useMovies } from "../../hooks/useMovies";
-import { MovieCardSelected } from "../../components";
+import { SelectedMoviesSection } from "../../components/SelectedMovies";
 
 const MAX_PAGES = 500;
 
@@ -26,22 +24,12 @@ export interface IMovie {
   genres?: IGenre[];
 }
 
-const SelectedMovies = styled(Paper)(({ theme }) => ({
-  backgroundColor: "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
-  height: "calc(100vh - 200px)",
-  position: "sticky",
-  top: theme.spacing(2),
-}));
-
 const Home = () => {
   const [page, setPage] = useState(1);
   const { loading, error, data } = useQuery(MOVIES_QUERY, {
     variables: { page },
   });
-  const { selectedMovies, selectMovie, deleteMovie } = useMovies();
+  const { selectMovie, deleteMovie, selectedMovies } = useMovies();
 
   if (error) {
     return <div>Error</div>;
@@ -77,26 +65,10 @@ const Home = () => {
             </Box>
           </Paper>
         </Grid>
-        <Grid xs={12} md={4}>
-          <SelectedMovies>
-            <Stack
-              spacing={2}
-              direction="column"
-              sx={{ maxHeight: "75%", overflowY: "auto" }}
-            >
-              {selectedMovies.map((movie: IMovie) => (
-                <Box>
-                  <MovieCardSelected
-                    key={movie.id}
-                    movieId={movie.id}
-                    onDeleteMovie={deleteMovie}
-                  />
-                </Box>
-              ))}
-            </Stack>
-            <Box sx={{ position: "absolute", bottom: 0 }}>Test</Box>
-          </SelectedMovies>
-        </Grid>
+        <SelectedMoviesSection
+          deleteMovie={deleteMovie}
+          selectedMovies={selectedMovies}
+        />
       </Grid>
     </Box>
   );

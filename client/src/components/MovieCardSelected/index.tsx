@@ -20,10 +20,10 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
   return loading ? (
     <div>Loading...</div>
   ) : (
-    <Card sx={{ display: "flex", height: 100, position: "relative" }}>
+    <Card sx={{ display: "flex" }}>
       <CardMedia
         component="img"
-        sx={{ maxWidth: 80, minWidth: 80, objectFit: "fill" }}
+        sx={{ width: 100 }}
         image={data.movieDetails.posterPath}
         alt={data.movieDetails.title}
       />
@@ -32,17 +32,14 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
           display: "flex",
           flexDirection: "column",
           width: "100%",
+          position: "relative",
         }}
       >
         <CardContent sx={{ flex: "1 0 auto", padding: 0.5 }}>
-          <Typography
-            component="div"
-            variant="h6"
-            sx={{ whiteSpace: "nowrap", overflow: "hidden" }}
-          >
+          <Typography component="div" variant="h6">
             {data.movieDetails.title}
           </Typography>
-          <Box sx={{ display: "flex", flexWrap: "wrap" }}>
+          <Box sx={{ display: "flex" }}>
             <Typography variant={"subtitle2"} component={"h4"}>
               Genre:&nbsp;
             </Typography>
@@ -51,11 +48,11 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
             </Typography>
           </Box>
         </CardContent>
+        <OptionButton
+          titleButton={"Delete"}
+          onClickButton={() => onDeleteMovie(movieId)}
+        />
       </Box>
-      <OptionButton
-        titleButton={"Delete"}
-        onClickButton={() => onDeleteMovie(movieId)}
-      />
     </Card>
   );
 };
