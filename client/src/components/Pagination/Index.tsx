@@ -8,7 +8,7 @@ interface Props {
   page: number;
 }
 
-export default function BasicPagination({ totalPages, setPage, page }: Props) {
+export const BasicPagination = ({ totalPages, setPage, page }: Props) => {
   const onPageClick = (event: React.ChangeEvent<unknown>, page: number) => {
     setPage(page);
   };
@@ -28,4 +28,4 @@ export default function BasicPagination({ totalPages, setPage, page }: Props) {
       />
     </Stack>
   );
-}
+};

@@ -2,11 +2,11 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
 import { useQuery } from "@apollo/client";
-import MovieCard from "../../components/MovieCard";
-import BasicPagination from "../../components/Pagination/Index";
+import { MovieCard } from "../../components";
+import { BasicPagination } from "../../components/Pagination/Index";
 import { MOVIES_QUERY } from "./queries";
 import { useState } from "react";
-import { useMovies } from "../../hooks/useMovies";
+import { useMovies } from "../../hooks";
 import { SelectedMoviesSection } from "../../components/SelectedMovies";
 
 const MAX_PAGES = 500;

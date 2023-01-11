@@ -18,11 +18,15 @@ export class Movie {
   releaseDate: string;
   genres?: Genre[];
 
-  constructor(movie: IMovie, posterSize?: number) {
+  constructor(movie: IMovie) {
     this.id = movie.id;
     this.title = movie.title;
     this.posterPath = `${BASIC_POSTER_PATH}${movie.poster_path}`;
-    this.releaseDate = movie.release_date;
+    this.releaseDate = movie.release_date
+      .replaceAll("-", ".")
+      .split(".")
+      .reverse()
+      .join(".");
     this.genres = movie.genres?.map((genre) => new Genre(genre));
   }
 }

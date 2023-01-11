@@ -19,9 +19,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { Link as RouterLink } from "react-router-dom";
 
-function Navigation() {
+export const Navigation = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
   const list = () => (
     <Box sx={{ width: 250 }} role="presentation">
       <List>
@@ -93,6 +92,4 @@ function Navigation() {
       </Drawer>
     </Box>
   );
-}
-
-export default Navigation;
+};

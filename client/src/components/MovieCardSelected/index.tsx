@@ -8,7 +8,7 @@ export interface Props {
   onDeleteMovie: (id: number) => void;
 }
 
-const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
+export const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
   const { loading, error, data } = useQuery(MOVIEDETAILS_QUERY, {
     variables: { id: movieId },
   });
@@ -47,6 +47,9 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
               {data.movieDetails.genres[0].name}
             </Typography>
           </Box>
+          <Typography component="div" variant="body2">
+            {data.movieDetails.releaseDate}
+          </Typography>
         </CardContent>
         <OptionButton
           titleButton={"Delete"}
@@ -56,5 +59,3 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
     </Card>
   );
 };
-
-export default MovieCardSelected;

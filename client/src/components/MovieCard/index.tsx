@@ -10,40 +10,30 @@ export interface Props {
   onCardSelect: (movie: IMovie) => void;
 }
 
-const MovieCard = ({ movie, onCardSelect }: Props) => {
-  const correctDate = movie.releaseDate
-    .replaceAll("-", ".")
-    .split(".")
-    .reverse()
-    .join(".");
+export const MovieCard = ({ movie, onCardSelect }: Props) => (
+  <Card sx={{ maxWidth: 250, maxHeight: 420, position: "relative" }}>
+    <OptionButton
+      titleButton={"Select"}
+      onClickButton={() => onCardSelect(movie)}
+    />
 
-  return (
-    <Card sx={{ maxWidth: 250, maxHeight: 420, position: "relative" }}>
-      <OptionButton
-        titleButton={"Select"}
-        onClickButton={() => onCardSelect(movie)}
-      />
-
-      <CardMedia
-        component="img"
-        sx={{ width: "100%", height: "100%", maxHeight: 330, minHeight: 330 }}
-        image={movie.posterPath}
-        alt={movie.title}
-      />
-      <CardContent>
-        <Typography
-          variant="h6"
-          component="h3"
-          sx={{ whiteSpace: "nowrap", overflow: "hidden" }}
-        >
-          {movie.title}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {correctDate}
-        </Typography>
-      </CardContent>
-    </Card>
-  );
-};
-
-export default MovieCard;
+    <CardMedia
+      component="img"
+      sx={{ width: "100%", height: "100%", maxHeight: 330, minHeight: 330 }}
+      image={movie.posterPath}
+      alt={movie.title}
+    />
+    <CardContent>
+      <Typography
+        variant="h6"
+        component="h3"
+        sx={{ whiteSpace: "nowrap", overflow: "hidden" }}
+      >
+        {movie.title}
+      </Typography>
+      <Typography variant="body2" component="p">
+        {movie.releaseDate}
+      </Typography>
+    </CardContent>
+  </Card>
+);
