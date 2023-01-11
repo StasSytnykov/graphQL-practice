@@ -82,7 +82,7 @@ const Home = () => {
             <Stack
               spacing={2}
               direction="column"
-              sx={{ maxHeight: 400, overflowY: "auto" }}
+              sx={{ maxHeight: "75%", overflowY: "auto" }}
             >
               {selectedMovies.map((movie: IMovie) => (
                 <Box>
@@ -94,7 +94,7 @@ const Home = () => {
                 </Box>
               ))}
             </Stack>
-            <Box>Test</Box>
+            <Box sx={{ position: "absolute", bottom: 0 }}>Test</Box>
           </SelectedMovies>
         </Grid>
       </Grid>

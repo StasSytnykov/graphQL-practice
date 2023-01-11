@@ -18,7 +18,7 @@ export class Movie {
   releaseDate: string;
   genres?: Genre[];
 
-  constructor(movie: IMovie) {
+  constructor(movie: IMovie, posterSize?: number) {
     this.id = movie.id;
     this.title = movie.title;
     this.posterPath = `${BASIC_POSTER_PATH}${movie.poster_path}`;

@@ -1,26 +1,12 @@
-import {
-  Button,
-  Box,
-  CardActions,
-  Typography,
-  CardContent,
-  Card,
-  CardMedia,
-  ListItem,
-  ListItemText,
-} from "@mui/material";
+import { Box, Typography, CardContent, Card, CardMedia } from "@mui/material";
 import { useQuery } from "@apollo/client";
 import { MOVIEDETAILS_QUERY } from "./queries";
+import { OptionButton } from "../OptionButton/OptionButton";
 
 export interface Props {
   movieId: number;
   onDeleteMovie: (id: number) => void;
 }
-
-type Genre = {
-  id: number;
-  name: string;
-};
 
 const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
   const { loading, error, data } = useQuery(MOVIEDETAILS_QUERY, {
@@ -34,10 +20,10 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
   return loading ? (
     <div>Loading...</div>
   ) : (
-    <Card sx={{ display: "flex", height: 100 }}>
+    <Card sx={{ display: "flex", height: 100, position: "relative" }}>
       <CardMedia
         component="img"
-        sx={{ width: 100 }}
+        sx={{ maxWidth: 80, minWidth: 80, objectFit: "fill" }}
         image={data.movieDetails.posterPath}
         alt={data.movieDetails.title}
       />
@@ -46,11 +32,14 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
           display: "flex",
           flexDirection: "column",
           width: "100%",
-          position: "relative",
         }}
       >
         <CardContent sx={{ flex: "1 0 auto", padding: 0.5 }}>
-          <Typography component="div" variant="h6">
+          <Typography
+            component="div"
+            variant="h6"
+            sx={{ whiteSpace: "nowrap", overflow: "hidden" }}
+          >
             {data.movieDetails.title}
           </Typography>
           <Box sx={{ display: "flex", flexWrap: "wrap" }}>
@@ -63,6 +52,10 @@ const MovieCardSelected = ({ movieId, onDeleteMovie }: Props) => {
           </Box>
         </CardContent>
       </Box>
+      <OptionButton
+        titleButton={"Delete"}
+        onClickButton={() => onDeleteMovie(movieId)}
+      />
     </Card>
   );
 };
