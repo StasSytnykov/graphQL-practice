@@ -5,8 +5,6 @@ import Typography from "@mui/material/Typography";
 import { IMovie } from "../../pages/Home";
 import { OptionButton } from "../OptionButton/OptionButton";
 
-const MAX_TITLE_LENGTH = 16;
-
 export interface Props {
   movie: IMovie;
   onCardSelect: (movie: IMovie) => void;

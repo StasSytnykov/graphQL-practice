@@ -5,7 +5,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
-import { IMovie } from "../../pages/Home";
 
 interface Props {
   titleButton: string;
