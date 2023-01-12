@@ -5,7 +5,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { IMovie } from "../../pages/Home";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
-import { SearchFilmInput } from "../SearchFilmInput";
+import { ConfirmFilmInput } from "../ConfirmFilmInput";
 
 const SelectedMovies = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -25,27 +25,39 @@ interface Props {
   selectedMovies: IMovie[];
 }
 
+export interface Values {
+  listName: string;
+}
+
 export const SelectedMoviesSection = ({
   deleteMovie,
   selectedMovies,
-}: Props) => (
-  <Grid xs={12} md={4}>
-    <SelectedMovies>
-      <Stack
-        spacing={2}
-        direction="column"
-        sx={{ maxHeight: "88%", overflowY: "auto", marginBottom: 1 }}
-      >
-        {selectedMovies.map((movie: IMovie) => (
-          <Box key={movie.id}>
-            <MovieCardSelected
-              movieId={movie.id}
-              onDeleteMovie={() => deleteMovie(movie.id)}
-            />
-          </Box>
-        ))}
-      </Stack>
-      <SearchFilmInput />
-    </SelectedMovies>
-  </Grid>
-);
+}: Props) => {
+  const onSubmit = (values: Values) => {
+    const ids = selectedMovies.map(({ id }) => id);
+    const link = `${window.location.host}/recommend?title=${
+      values.listName
+    }&ids=${ids.join("")}`;
+  };
+  return (
+    <Grid xs={12} md={4}>
+      <SelectedMovies>
+        <Stack
+          spacing={2}
+          direction="column"
+          sx={{ maxHeight: "88%", overflowY: "auto", marginBottom: 1 }}
+        >
+          {selectedMovies.map((movie: IMovie) => (
+            <Box key={movie.id}>
+              <MovieCardSelected
+                movieId={movie.id}
+                onDeleteMovie={() => deleteMovie(movie.id)}
+              />
+            </Box>
+          ))}
+        </Stack>
+        <ConfirmFilmInput onSubmit={onSubmit} />
+      </SelectedMovies>
+    </Grid>
+  );
+};

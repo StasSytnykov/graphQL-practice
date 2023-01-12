@@ -49,7 +49,7 @@ export const Navigation = () => {
     <Box>
       <AppBar position="static">
         <Toolbar>
-          <Hidden only={["lg", "xl"]}>
+          <Hidden only={["lg", "xl", "md"]}>
             <IconButton
               onClick={() => setIsDrawerOpen(true)}
               size="large"
