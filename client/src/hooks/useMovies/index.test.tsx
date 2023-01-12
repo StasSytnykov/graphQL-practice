@@ -6,6 +6,12 @@ describe("useMovies hook", () => {
     id: 1,
     title: "Test",
     releaseDate: "123",
+    genres: [
+      {
+        id: 1,
+        name: "test",
+      },
+    ],
   };
 
   it("should select movie", () => {

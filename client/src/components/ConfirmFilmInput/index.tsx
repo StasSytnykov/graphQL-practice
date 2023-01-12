@@ -1,10 +1,12 @@
 import Paper from "@mui/material/Paper";
 import InputBase from "@mui/material/InputBase";
+import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import CheckIcon from "@mui/icons-material/Check";
+import ShareIcon from "@mui/icons-material/Share";
 import { Form, Field } from "react-final-form";
 import { Values } from "../SelectedMovies";
 import { formValidation } from "./formValidation";
+import { red } from "@mui/material/colors";
 
 interface Props {
   onSubmit: (values: Values) => void;
@@ -30,17 +32,21 @@ export const ConfirmFilmInput = ({ onSubmit }: Props) => (
               <>
                 <InputBase
                   sx={{ ml: 1, flex: 1 }}
-                  placeholder="Confirm Movie"
-                  inputProps={{ "aria-label": "confirm movie" }}
+                  placeholder="Name your movies list"
+                  inputProps={{ "aria-label": "Sharing movies" }}
                   {...input}
                 />
-                {meta.error && meta.touched && <span>{meta.error}</span>}
+                {meta.error && meta.touched && (
+                  <Typography variant="caption" sx={{ color: red[500] }}>
+                    {meta.error}
+                  </Typography>
+                )}
               </>
             )}
           />
 
           <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-            <CheckIcon />
+            <ShareIcon color="primary" />
           </IconButton>
         </Paper>
       </form>

@@ -18,6 +18,6 @@ const Template: ComponentStory<typeof MovieCardSelected> = (args: Props) => (
 
 export const Primary = Template.bind({});
 Primary.args = {
-  movieId: 123,
+  movie: movies[0],
   onDeleteMovie: () => {},
 };

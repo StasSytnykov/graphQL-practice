@@ -28,12 +28,7 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  Genre: { // root type
-    id: number; // Int!
-    name: string; // String!
-  }
   Movie: { // root type
-    genres?: Array<NexusGenRootTypes['Genre'] | null> | null; // [Genre]
     id: number; // Int!
     posterPath?: string | null; // String
     releaseDate: string; // String!
@@ -59,12 +54,7 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
-  Genre: { // field return type
-    id: number; // Int!
-    name: string; // String!
-  }
   Movie: { // field return type
-    genres: Array<NexusGenRootTypes['Genre'] | null> | null; // [Genre]
     id: number; // Int!
     posterPath: string | null; // String
     releaseDate: string; // String!
@@ -83,12 +73,7 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
-  Genre: { // field return type name
-    id: 'Int'
-    name: 'String'
-  }
   Movie: { // field return type name
-    genres: 'Genre'
     id: 'Int'
     posterPath: 'String'
     releaseDate: 'String'

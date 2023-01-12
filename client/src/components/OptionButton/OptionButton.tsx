@@ -22,7 +22,7 @@ export const OptionButton = ({ titleButton, onClickButton }: Props) => {
   };
 
   return (
-    <Box sx={{ position: "absolute", right: 5, top: 5 }}>
+    <Box sx={{ position: "absolute", left: 5, top: 5 }}>
       <IconButton
         aria-label="more"
         id="long-button"
@@ -32,7 +32,7 @@ export const OptionButton = ({ titleButton, onClickButton }: Props) => {
         onClick={handleClick}
         sx={{ backgroundColor: grey[100], opacity: 0.8, height: 30, width: 30 }}
       >
-        <MoreVertIcon sx={{ color: grey[600] }} />
+        <MoreVertIcon color={"primary"} />
       </IconButton>
       <Menu
         sx={{ position: "absolute" }}

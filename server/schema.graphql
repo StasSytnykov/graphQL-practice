@@ -2,13 +2,7 @@
 ### Do not make changes to this file directly
 
 
-type Genre {
-  id: Int!
-  name: String!
-}
-
 type Movie {
-  genres: [Genre]
   id: Int!
   posterPath: String
   releaseDate: String!

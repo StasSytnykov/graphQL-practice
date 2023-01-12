@@ -1,27 +1,21 @@
+import { useState } from "react";
+import { useQuery } from "@apollo/client";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Unstable_Grid2";
 import Paper from "@mui/material/Paper";
-import { useQuery } from "@apollo/client";
-import { MovieCard } from "../../components";
-import { BasicPagination } from "../../components/Pagination/Index";
 import { MOVIES_QUERY } from "./queries";
-import { useState } from "react";
 import { useMovies } from "../../hooks";
-import { SelectedMoviesSection } from "../../components/SelectedMovies";
+import { MovieCard } from "../../components";
+import { BasicPagination } from "../../components";
+import { SelectedMoviesSection } from "../../components";
 
 const MAX_PAGES = 500;
-
-interface IGenre {
-  id: number;
-  name?: string;
-}
 
 export interface IMovie {
   id: number;
   posterPath?: string;
   releaseDate: string;
   title: string;
-  genres?: IGenre[];
 }
 
 const Home = () => {

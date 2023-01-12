@@ -18,17 +18,17 @@ export const Movie = objectType({
     t.nonNull.string("releaseDate");
     t.string("posterPath");
     t.nonNull.int("id");
-    t.list.field("genres", { type: Genre });
+    // t.list.field("genres", { type: Genre });
   },
 });
 
-export const Genre = objectType({
-  name: "Genre",
-  definition(t) {
-    t.nonNull.int("id");
-    t.nonNull.string("name");
-  },
-});
+// export const Genre = objectType({
+//   name: "Genre",
+//   definition(t) {
+//     t.nonNull.int("id");
+//     t.nonNull.string("name");
+//   },
+// });
 
 export const MoviesQuery = extendType({
   type: "Query",

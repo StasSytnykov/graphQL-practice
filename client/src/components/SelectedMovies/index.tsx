@@ -6,6 +6,8 @@ import { IMovie } from "../../pages/Home";
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { ConfirmFilmInput } from "../ConfirmFilmInput";
+import { ConfirmModal } from "../index";
+import { useState } from "react";
 
 const SelectedMovies = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -33,11 +35,18 @@ export const SelectedMoviesSection = ({
   deleteMovie,
   selectedMovies,
 }: Props) => {
+  const [url, setUrl] = useState("");
+
   const onSubmit = (values: Values) => {
     const ids = selectedMovies.map(({ id }) => id);
     const link = `${window.location.host}/recommend?title=${
       values.listName
     }&ids=${ids.join("")}`;
+    setUrl(link);
+  };
+
+  const onCloseModal = () => {
+    setUrl("");
   };
   return (
     <Grid xs={12} md={4}>
@@ -50,7 +59,7 @@ export const SelectedMoviesSection = ({
           {selectedMovies.map((movie: IMovie) => (
             <Box key={movie.id}>
               <MovieCardSelected
-                movieId={movie.id}
+                movie={movie}
                 onDeleteMovie={() => deleteMovie(movie.id)}
               />
             </Box>
@@ -58,6 +67,7 @@ export const SelectedMoviesSection = ({
         </Stack>
         <ConfirmFilmInput onSubmit={onSubmit} />
       </SelectedMovies>
+      <ConfirmModal open={!!url} url={url} onCloseModal={onCloseModal} />
     </Grid>
   );
 };
