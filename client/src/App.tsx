@@ -1,6 +1,8 @@
 import { CssBaseline, Container, Box } from "@mui/material";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Navigation } from "./components";
 
 function App() {
@@ -26,6 +28,7 @@ function App() {
             <Outlet />
           </Container>
         </Box>
+        <ToastContainer />
       </>
     </ApolloProvider>
   );

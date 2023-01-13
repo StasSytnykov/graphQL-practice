@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { IMovie } from "../../pages/Home";
+import { notify } from "../../utils/notify";
 
 export const MAX_SELECTED_MOVIES = 20;
 
@@ -14,11 +15,11 @@ export const useMovies = () => {
       const moviesQuantity = selectedMovies.length;
 
       if (isAddedMovie) {
-        alert("This movie already added");
+        notify("This movie already added");
       } else if (moviesQuantity < MAX_SELECTED_MOVIES) {
         setSelectedMovies([movie, ...selectedMovies]);
       } else {
-        alert("Maximum movies is 20");
+        notify("Maximum movies is 20");
       }
     },
     [selectedMovies]
