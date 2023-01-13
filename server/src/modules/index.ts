@@ -13,10 +13,10 @@ export const getPopular = async (page = 1) => {
   return new Movies(result.data);
 };
 
-export const getDetails = async (movieId: number) => {
-  const result = await axios.get(
-    `${DEFAULT_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US&`
+export const getDetails = async (movieIds: number[]) => {
+  const requests = movieIds.map(async (id) =>
+    axios.get(`${DEFAULT_URL}/movie/${id}?api_key=${API_KEY}&language=en-US&`)
   );
-
-  return new Movie(result.data);
+  const data = await Promise.all(requests);
+  return data.map((movie) => new Movie(movie.data));
 };

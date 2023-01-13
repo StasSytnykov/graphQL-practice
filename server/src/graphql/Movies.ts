@@ -1,5 +1,7 @@
-import { objectType, intArg, extendType } from "nexus";
+import { objectType, intArg, extendType, list, nonNull } from "nexus";
 import { getDetails, getPopular } from "../modules";
+import { Movies as MoviesClass } from "../modules/movies/entities/Movies";
+import { Movie as MovieClass } from "../modules/movies/entities/Movie";
 
 export const Movies = objectType({
   name: "Movies",
@@ -18,17 +20,17 @@ export const Movie = objectType({
     t.nonNull.string("releaseDate");
     t.string("posterPath");
     t.nonNull.int("id");
-    // t.list.field("genres", { type: Genre });
+    t.list.field("genres", { type: Genre });
   },
 });
 
-// export const Genre = objectType({
-//   name: "Genre",
-//   definition(t) {
-//     t.nonNull.int("id");
-//     t.nonNull.string("name");
-//   },
-// });
+export const Genre = objectType({
+  name: "Genre",
+  definition(t) {
+    t.nonNull.int("id");
+    t.nonNull.string("name");
+  },
+});
 
 export const MoviesQuery = extendType({
   type: "Query",
@@ -38,17 +40,17 @@ export const MoviesQuery = extendType({
       args: {
         take: intArg(),
       },
-      async resolve(parent, args, context, info): Promise<any> {
+      async resolve(parent, args, context, info): Promise<MoviesClass> {
         return await getPopular(args.take ? args.take : undefined);
       },
     });
     t.nonNull.field("movieDetails", {
-      type: Movie,
+      type: list(Movie),
       args: {
-        id: intArg(),
+        ids: nonNull(list(nonNull("Int"))),
       },
-      async resolve(parent, args, context, info): Promise<any> {
-        return await getDetails(args.id ? args.id : 1);
+      async resolve(parent, args, context, info): Promise<MovieClass[]> {
+        return await getDetails(args.ids);
       },
     });
   },

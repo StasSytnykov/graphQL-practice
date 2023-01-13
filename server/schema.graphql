@@ -2,7 +2,13 @@
 ### Do not make changes to this file directly
 
 
+type Genre {
+  id: Int!
+  name: String!
+}
+
 type Movie {
+  genres: [Genre]
   id: Int!
   posterPath: String
   releaseDate: String!
@@ -17,6 +23,6 @@ type Movies {
 }
 
 type Query {
-  movieDetails(id: Int): Movie!
+  movieDetails(ids: [Int!]!): [Movie]!
   movies(take: Int): Movies!
 }
