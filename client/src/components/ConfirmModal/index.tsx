@@ -6,6 +6,7 @@ import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import { styled } from "@mui/material/styles";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useState } from "react";
@@ -16,13 +17,20 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   borderRadius: 4,
   p: 4,
 };
+
+const StyledBox = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    width: 300,
+  },
+  [theme.breakpoints.up("sm")]: {
+    width: 400,
+  },
+}));
 
 interface Props {
   open: boolean;
@@ -40,7 +48,7 @@ export const ConfirmModal = ({ open, onCloseModal, url }: Props) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <StyledBox sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
           Your link for sharing movies
         </Typography>
@@ -79,7 +87,7 @@ export const ConfirmModal = ({ open, onCloseModal, url }: Props) => {
             </IconButton>
           </CopyToClipboard>
         </Paper>
-      </Box>
+      </StyledBox>
     </Modal>
   );
 };
