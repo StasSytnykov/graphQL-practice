@@ -77,8 +77,8 @@ export interface NexusGenFieldTypes {
     totalResults: number; // Int!
   }
   Query: { // field return type
-    movieDetails: Array<NexusGenRootTypes['Movie'] | null>; // [Movie]!
     movies: NexusGenRootTypes['Movies']; // Movies!
+    moviesByIds: Array<NexusGenRootTypes['Movie'] | null>; // [Movie]!
   }
 }
 
@@ -101,18 +101,18 @@ export interface NexusGenFieldTypeNames {
     totalResults: 'Int'
   }
   Query: { // field return type name
-    movieDetails: 'Movie'
     movies: 'Movies'
+    moviesByIds: 'Movie'
   }
 }
 
 export interface NexusGenArgTypes {
   Query: {
-    movieDetails: { // args
-      ids: number[]; // [Int!]!
-    }
     movies: { // args
       take?: number | null; // Int
+    }
+    moviesByIds: { // args
+      ids: string[]; // [String!]!
     }
   }
 }

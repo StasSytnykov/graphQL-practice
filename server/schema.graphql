@@ -23,6 +23,6 @@ type Movies {
 }
 
 type Query {
-  movieDetails(ids: [Int!]!): [Movie]!
   movies(take: Int): Movies!
+  moviesByIds(ids: [String!]!): [Movie]!
 }

@@ -4,14 +4,21 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { IMovie } from "../../pages/Home";
 import { OptionButton } from "../OptionButton/OptionButton";
+import { styled } from "@mui/material/styles";
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  [theme.breakpoints.down("sm")]: {
+    minWidth: 250,
+  },
+}));
 
 export interface Props {
   movie: IMovie;
-  onCardSelect: (movie: IMovie) => void;
+  onCardSelect?: (movie: IMovie) => void;
 }
 
-export const MovieCard = ({ movie, onCardSelect }: Props) => (
-  <Card sx={{ maxWidth: 250, maxHeight: 420, position: "relative" }}>
+export const MovieCard = ({ movie, onCardSelect = () => {} }: Props) => (
+  <StyledCard sx={{ maxWidth: 250, maxHeight: 420, position: "relative" }}>
     <OptionButton
       titleButton={"Select"}
       onClickButton={() => onCardSelect(movie)}
@@ -35,5 +42,5 @@ export const MovieCard = ({ movie, onCardSelect }: Props) => (
         {movie.releaseDate}
       </Typography>
     </CardContent>
-  </Card>
+  </StyledCard>
 );

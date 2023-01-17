@@ -19,7 +19,7 @@ const router = createBrowserRouter([
         element: <Settings />,
       },
       {
-        path: "recommendation",
+        path: "recommend",
         element: <Recommendation />,
       },
     ],

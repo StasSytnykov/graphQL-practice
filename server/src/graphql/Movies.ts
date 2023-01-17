@@ -44,10 +44,10 @@ export const MoviesQuery = extendType({
         return await getPopular(args.take ? args.take : undefined);
       },
     });
-    t.nonNull.field("movieDetails", {
+    t.nonNull.field("moviesByIds", {
       type: list(Movie),
       args: {
-        ids: nonNull(list(nonNull("Int"))),
+        ids: nonNull(list(nonNull("String"))),
       },
       async resolve(parent, args, context, info): Promise<MovieClass[]> {
         return await getDetails(args.ids);

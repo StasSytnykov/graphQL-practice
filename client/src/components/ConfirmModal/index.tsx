@@ -7,6 +7,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
+import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useState } from "react";
@@ -75,6 +76,15 @@ export const ConfirmModal = ({ open, onCloseModal, url }: Props) => {
             defaultValue={url}
             disabled={true}
           />
+          <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+          <IconButton
+            href={url}
+            target={"_blank"}
+            sx={{ p: "10px" }}
+            aria-label="link"
+          >
+            <InsertLinkIcon color={"primary"} />
+          </IconButton>
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
           <CopyToClipboard text={url} onCopy={() => setCopied(true)}>
             <IconButton
