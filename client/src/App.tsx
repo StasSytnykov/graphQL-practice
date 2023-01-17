@@ -1,12 +1,39 @@
 import { CssBaseline, Container, Box } from "@mui/material";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  HttpLink,
+  ApolloLink,
+  from,
+} from "@apollo/client";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Navigation } from "./components";
+import { useContext } from "react";
+import { AppContext } from "./context";
 
 function App() {
+  const { locale } = useContext(AppContext);
+  const httpLink = new HttpLink({ uri: "http://localhost:4000/" });
+
+  const localeMiddleware = new ApolloLink((operation, forward) => {
+    const customHeaders = operation.getContext().hasOwnProperty("headers")
+      ? operation.getContext().headers
+      : {};
+
+    operation.setContext({
+      headers: {
+        ...customHeaders,
+        locale,
+      },
+    });
+    return forward(operation);
+  });
+
   const client = new ApolloClient({
+    link: from([localeMiddleware, httpLink]),
     uri: "http://localhost:4000/",
     cache: new InMemoryCache(),
   });

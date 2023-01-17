@@ -4,11 +4,16 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import { Settings, Home, Recommendation } from "./pages";
+import { AppContextProvider } from "./context";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <AppContextProvider>
+        <App />
+      </AppContextProvider>
+    ),
     children: [
       {
         index: true,
