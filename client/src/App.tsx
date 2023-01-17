@@ -34,7 +34,6 @@ function App() {
 
   const client = new ApolloClient({
     link: from([localeMiddleware, httpLink]),
-    uri: "http://localhost:4000/",
     cache: new InMemoryCache(),
   });
 

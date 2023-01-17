@@ -40,8 +40,8 @@ export const MoviesQuery = extendType({
       args: {
         take: intArg(),
       },
-      async resolve(parent, args, context, info): Promise<MoviesClass> {
-        return await getPopular(args.take ? args.take : undefined);
+      async resolve(parent, args, { locale }, info): Promise<MoviesClass> {
+        return await getPopular(args.take ? args.take : undefined, locale);
       },
     });
     t.nonNull.field("moviesByIds", {
@@ -49,8 +49,8 @@ export const MoviesQuery = extendType({
       args: {
         ids: nonNull(list(nonNull("String"))),
       },
-      async resolve(parent, args, context, info): Promise<MovieClass[]> {
-        return await getDetails(args.ids);
+      async resolve(parent, args, { locale }, info): Promise<MovieClass[]> {
+        return await getDetails(args.ids, locale);
       },
     });
   },
