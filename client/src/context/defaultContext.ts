@@ -1,5 +1,6 @@
 import { DefaultAction } from "./index";
 import React from "react";
+import { getFromStorage, STORAGE_KEY } from "../utils/localStorage";
 
 type Locales = {
   ENGLISH: "en-us";
@@ -19,6 +20,6 @@ export interface DefaultContext {
 }
 
 export const defaultContext: DefaultContext = {
-  locale: LOCALES.ENGLISH,
+  locale: getFromStorage(STORAGE_KEY) || LOCALES.ENGLISH,
   contextDispatch: () => {},
 };
