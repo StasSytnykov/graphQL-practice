@@ -18,6 +18,7 @@
     "@types/node": "^16.18.11",
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
+    "country-flag-icons": "^1.5.5",
     "dotenv": "^16.0.3",
     "final-form": "^4.20.8",
     "flat": "^5.0.2",

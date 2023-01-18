@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { US, UA } from "country-flag-icons/react/3x2";
 import { Link as RouterLink } from "react-router-dom";
 import { AppContext } from "../../context";
 import { Tlocale, LOCALES } from "../../context/defaultContext";
@@ -89,17 +90,17 @@ export const Navigation = () => {
           <Box>
             <Button
               disabled={locale === LOCALES.ENGLISH}
-              sx={{ my: 2, color: "white" }}
+              sx={{ my: 2, opacity: locale === LOCALES.ENGLISH ? 1 : 0.5 }}
               onClick={() => setLanguage(LOCALES.ENGLISH)}
             >
-              English
+              <US title="United States" />
             </Button>
             <Button
               disabled={locale === LOCALES.UKRANIAN}
-              sx={{ my: 2, color: "white" }}
+              sx={{ my: 2, opacity: locale === LOCALES.UKRANIAN ? 1 : 0.5 }}
               onClick={() => setLanguage(LOCALES.UKRANIAN)}
             >
-              Українська
+              <UA title="Ukraine" />
             </Button>
           </Box>
 
