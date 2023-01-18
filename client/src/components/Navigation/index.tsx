@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import {
   Box,
   AppBar,
@@ -25,9 +26,12 @@ export const Navigation = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const { locale, contextDispatch } = useContext(AppContext);
 
-  const setLanguage = useCallback((locale: Tlocale) => {
-    contextDispatch({ type: "setLocale", locale });
-  }, []);
+  const setLanguage = useCallback(
+    (locale: Tlocale) => {
+      contextDispatch({ type: "setLocale", locale });
+    },
+    [contextDispatch]
+  );
 
   const list = () => (
     <Box sx={{ width: 250 }} role="presentation">
@@ -77,7 +81,7 @@ export const Navigation = () => {
               sx={{ textDecoration: "none" }}
             >
               <Typography variant="h6" component="div" sx={{ color: "white" }}>
-                Movies recommendation
+                <FormattedMessage id="headerTab.recommend" />
               </Typography>
             </Link>
           </Box>
@@ -102,7 +106,7 @@ export const Navigation = () => {
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Link to={"settings"} component={RouterLink}>
               <Button sx={{ my: 2, color: "white", display: "block" }}>
-                Settings
+                <FormattedMessage id="headerTab.settings" />
               </Button>
             </Link>
           </Box>

@@ -1,32 +1,44 @@
 import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
 import { useQuery } from "@apollo/client";
 import { MOVIES_BY_IDS } from "./queries";
 import Grid from "@mui/material/Unstable_Grid2";
 import { MovieCard } from "../../components";
 import { IMovie, StyledGrid } from "../Home";
+import { AppContext } from "../../context";
 
 export const Recommendation = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [params, setParams] = useState<{ ids: string[]; title: string }>({
+  const [searchParams] = useSearchParams();
+  const [params, setParams] = useState<{
+    ids: string[];
+    title: string;
+  }>({
     ids: [],
     title: "",
   });
   const { loading, error, data } = useQuery(MOVIES_BY_IDS, {
     variables: { ids: params.ids },
   });
+  const { contextDispatch } = useContext(AppContext);
 
   useEffect(() => {
     const ids = searchParams.get("ids");
     const title = searchParams.get("title");
+    const language = searchParams.get("language");
 
     setParams({
       ids: ids ? ids.split(",") : [],
       title: title ? title : "Default title",
     });
-  }, [searchParams]);
-  console.log(data);
+
+    const recommendLocale = language;
+
+    contextDispatch({
+      type: "setLocale",
+      locale: recommendLocale === "uk" ? recommendLocale : "en-us",
+    });
+  }, [searchParams, contextDispatch]);
 
   if (error) return <div>Error</div>;
 

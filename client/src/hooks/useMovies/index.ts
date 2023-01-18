@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { useIntl } from "react-intl";
 import { IMovie } from "../../pages/Home";
 import { notify } from "../../utils/notify";
 
@@ -6,6 +7,7 @@ export const MAX_SELECTED_MOVIES = 20;
 
 export const useMovies = () => {
   const [selectedMovies, setSelectedMovies] = useState<IMovie[]>([]);
+  const intl = useIntl();
 
   const selectMovie = useCallback(
     (movie: IMovie) => {
@@ -15,14 +17,22 @@ export const useMovies = () => {
       const moviesQuantity = selectedMovies.length;
 
       if (isAddedMovie) {
-        notify("This movie already added");
+        notify(
+          intl.formatMessage({
+            id: "alert.isAdded",
+          })
+        );
       } else if (moviesQuantity < MAX_SELECTED_MOVIES) {
         setSelectedMovies([movie, ...selectedMovies]);
       } else {
-        notify("Maximum movies is 20");
+        notify(
+          intl.formatMessage({
+            id: "alert.max",
+          })
+        );
       }
     },
-    [selectedMovies]
+    [selectedMovies, intl]
   );
 
   const deleteMovie = useCallback(

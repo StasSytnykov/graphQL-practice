@@ -5,13 +5,16 @@ import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import { Settings, Home, Recommendation } from "./pages";
 import { AppContextProvider } from "./context";
+import { ProviderWrapper } from "./components/Provider";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: (
       <AppContextProvider>
-        <App />
+        <ProviderWrapper>
+          <App />
+        </ProviderWrapper>
       </AppContextProvider>
     ),
     children: [

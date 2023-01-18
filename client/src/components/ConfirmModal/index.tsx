@@ -11,6 +11,7 @@ import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { notify } from "../../utils/notify";
 
 const style = {
@@ -41,6 +42,7 @@ interface Props {
 
 export const ConfirmModal = ({ open, onCloseModal, url }: Props) => {
   const [copied, setCopied] = useState(false);
+  const intl = useIntl();
 
   return (
     <Modal
@@ -51,7 +53,7 @@ export const ConfirmModal = ({ open, onCloseModal, url }: Props) => {
     >
       <StyledBox sx={style}>
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Your link for sharing movies
+          <FormattedMessage id="modal.title" />
         </Typography>
         <IconButton
           onClick={onCloseModal}
@@ -88,7 +90,13 @@ export const ConfirmModal = ({ open, onCloseModal, url }: Props) => {
           <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
           <CopyToClipboard text={url} onCopy={() => setCopied(true)}>
             <IconButton
-              onClick={() => notify("Link copied!")}
+              onClick={() =>
+                notify(
+                  intl.formatMessage({
+                    id: "modal.copied",
+                  })
+                )
+              }
               type="button"
               sx={{ p: "10px" }}
               aria-label="copy"

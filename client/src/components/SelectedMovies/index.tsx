@@ -7,7 +7,8 @@ import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import { ConfirmFilmInput } from "../ConfirmFilmInput";
 import { ConfirmModal } from "../index";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AppContext } from "../../context";
 
 const SelectedMovies = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -36,12 +37,13 @@ export const SelectedMoviesSection = ({
   selectedMovies,
 }: Props) => {
   const [url, setUrl] = useState("");
+  const { locale } = useContext(AppContext);
 
   const onSubmit = (values: Values) => {
     const ids = selectedMovies.map(({ id }) => id);
     const link = `${window.location.host}/recommend?title=${
       values.listName
-    }&ids=${ids.join(",")}`;
+    }&ids=${ids.join(",")}&language=${locale}`;
     setUrl(link);
   };
 
