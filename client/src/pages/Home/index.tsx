@@ -45,23 +45,27 @@ export const Home = () => {
           <Paper>Filters section</Paper>
         </Grid>
         <Grid xs={12} md={8}>
-          <Box sx={{ flexGrow: 1, padding: 2 }}>
+          <Box sx={{ flexGrow: 1 }}>
             {loading ? (
               "Loading..."
             ) : (
               <>
-                <StyledGrid container spacing={2}>
-                  {data.movies.results.map((movie: IMovie) => (
-                    <Grid key={movie.id} sm={4} md={4} lg={3}>
-                      <MovieCard movie={movie} onCardSelect={selectMovie} />
-                    </Grid>
-                  ))}
-                </StyledGrid>
-                <BasicPagination
-                  totalPages={MAX_PAGES}
-                  setPage={setPage}
-                  page={page}
-                />
+                <Paper sx={{ mt: 1 }}>
+                  <StyledGrid container spacing={2} sx={{ pt: 0 }}>
+                    {data.movies.results.map((movie: IMovie) => (
+                      <Grid key={movie.id} sm={4} md={4} lg={3}>
+                        <MovieCard movie={movie} onCardSelect={selectMovie} />
+                      </Grid>
+                    ))}
+                  </StyledGrid>
+                  <Box sx={{ p: 1 }}>
+                    <BasicPagination
+                      totalPages={MAX_PAGES}
+                      setPage={setPage}
+                      page={page}
+                    />
+                  </Box>
+                </Paper>
               </>
             )}
           </Box>
