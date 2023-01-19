@@ -43,7 +43,7 @@ interface Props {
 export const ConfirmModal = ({ open, onCloseModal, url }: Props) => {
   const [copied, setCopied] = useState(false);
   const intl = useIntl();
-
+  console.log(copied);
   return (
     <Modal
       open={open}
