@@ -16,7 +16,9 @@ import { AppContext } from "./context";
 
 function App() {
   const { locale } = useContext(AppContext);
-  const httpLink = new HttpLink({ uri: `http://localhost:4000/graphql` });
+  const httpLink = new HttpLink({
+    uri: `https://europe-central2-mystical-tensor-332213.cloudfunctions.net/function-1`,
+  });
 
   const localeMiddleware = new ApolloLink((operation, forward) => {
     const customHeaders = operation.getContext().hasOwnProperty("headers")
