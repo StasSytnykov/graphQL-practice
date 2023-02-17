@@ -10,6 +10,8 @@ import {
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AppContextProvider } from "./context";
+import { ProviderWrapper } from "./components/Provider";
 import { Navigation } from "./components";
 import { useContext } from "react";
 import { AppContext } from "./context";
@@ -40,25 +42,29 @@ function App() {
   });
 
   return (
-    <ApolloProvider client={client}>
-      <>
-        <CssBaseline />
-        <Navigation />
+    <AppContextProvider>
+      <ProviderWrapper>
+        <ApolloProvider client={client}>
+          <>
+            <CssBaseline />
+            <Navigation />
 
-        <Box
-          sx={{
-            backgroundColor: (theme) => theme.palette.grey[100],
-            height: "calc(100vh - 68.5px)",
-            overflow: "auto",
-          }}
-        >
-          <Container maxWidth={"xl"}>
-            <Outlet />
-          </Container>
-        </Box>
-        <ToastContainer />
-      </>
-    </ApolloProvider>
+            <Box
+              sx={{
+                backgroundColor: (theme) => theme.palette.grey[100],
+                height: "calc(100vh - 68.5px)",
+                overflow: "auto",
+              }}
+            >
+              <Container maxWidth={"xl"}>
+                <Outlet />
+              </Container>
+            </Box>
+            <ToastContainer />
+          </>
+        </ApolloProvider>
+      </ProviderWrapper>
+    </AppContextProvider>
   );
 }
 
